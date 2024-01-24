@@ -188,3 +188,119 @@ export STABILITY_KEY=yourkeyhere
 python -m stability_sdk generate "A stunning house."
 ```
 ---
+## REST API  image-to-video
+- 우선 image-to-video API 는 alpha 버전임. 
+- 본 API는 base image를 바탕으로 짧은 video를 생성하는 API
+- Video generations are asynchronous, so after starting a generation use the `id` returned in the response to poll
+### POST(생성)
+![image](/images/POST1.png)
+![image](/images/POST2.png)
+- 예시 
+```
+import requests
+
+response = requests.post(
+    "https://api.stability.ai/v2alpha/generation/image-to-video",
+    headers={
+        "authorization": "Bearer sk-MYAPIKEY",
+    },
+    data={
+        "seed": 0,
+        "cfg_scale": 2.5,
+        "motion_bucket_id": 40
+    },
+    files={
+        "image": ("file", open("image.png", "rb"), "image/png")
+    },
+)
+
+if response.status_code != 200:
+    raise Exception("Non-200 response: " + str(response.text))
+
+data = response.json()
+generation_id = data["id"]
+print(generation_id)
+```
+- 응답은 3가지 있음. 
+- 200 (good) (id를 받음)
+```
+{
+  "id": "eeaf194a01324b4c56cc040f17ff0af0205035484246651a500b8abe8a2f0322"
+}
+```
+- 400
+```
+{
+  "name": "bad_request",
+  "errors": [
+    "some-field: is required"
+  ]
+}
+```
+- 500
+```
+{
+  "name": "internal_error",
+  "errors": [
+    "An unexpected server error has occurred, please try again later."
+  ]
+}
+```
+### GET(Read)
+![image](/images/GET1.png)
+- 예시
+```
+generation_id = "e52772ac75b..."
+
+response = requests.request(
+    "GET",
+    f"https://api.stability.ai/v2alpha/generation/image-to-video/result/{generation_id}",
+    headers={
+        'Accept': None, # Use 'application/json' to receive base64 encoded JSON
+        'authorization': 'sk-MYAPIKEY'
+    },
+)
+
+if response.status_code == 202:
+    print("Generation in-progress, try again in 10 seconds.")
+elif response.status_code == 200:
+    print("Generation complete!")
+    with open('./output.mp4', 'wb') as file:
+        file.write(response.content)
+else:
+    raise Exception("Non-200 response: " + str(response.json()))
+
+```
+- 응답
+![GET](/images/GET_RESPONE.png)
+- 
+```
+{
+  "video": "AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1...",
+  "finishReason": "SUCCESS",
+  "seed": 343940597
+}
+```
+
+
+## 에러사항
+- 짧음 
+- Longer generations 키워드로 보고 
+- 동영상 생성이 -> 장르마다 고정되어야할 것 같고 
+- 웬만하면 오브젝트 건들지말고, 그림안에서 시점이 움직이는 것처럼 
+- 예를 들면 360도 회전하면서 보는 것처럼 보기 ? ? 키워드 ? ? 
+- camera motion setting?? 
+- camera movement
+- horizontal movement 
+
+- image + 디스크립션 가능? 
+## Animation 기능 확인 
+[StabilityAI_Animation](./base_term_explain/stabilityai_anim.md)
+
+
+
+## TODO 
+[] longer generation -> 불가능 
+	- 마지막 프레임을 다시 요청?? <br>
+[] Camera motion setting in SVD (horizontal movement)<br>
+[] multimodel(image + text_prompt) in SVD
