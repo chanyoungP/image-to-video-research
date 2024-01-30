@@ -1,6 +1,6 @@
 import cv2
 
-def play_and_reverse(input_video_path, output_video_path):
+def make_video_reverse(input_video_path, output_video_path):
     # 비디오 캡쳐 객체 생성
     cap = cv2.VideoCapture(input_video_path)
 
@@ -51,4 +51,4 @@ if __name__ == "__main__":
     input_video_path = './outputvideos/output (1).mp4'
     output_video_path = './outputvideos/output_reverse.mp4'
 
-    play_and_reverse(input_video_path, output_video_path)
+    make_video_reverse(input_video_path, output_video_path)

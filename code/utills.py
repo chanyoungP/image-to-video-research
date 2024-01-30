@@ -37,7 +37,7 @@ def get_resized_image_from_path(image_path, w=768, h=768, save_image = False, ou
 
     return resized_image, FULL_PATH
 
-def play_and_reverse(input_video_path, output_video_path):
+def make_video_reverse(input_video_path, output_video_path):
     '''
     # forward_play + backward_play 
     - make a video play time to double by combining forward_play video with backward_play video
@@ -87,9 +87,9 @@ def play_and_reverse(input_video_path, output_video_path):
 
     # 비디오 작성 객체 해제
     out.release()
-    
-    return output_video_path
 
+    return output_video_path
+    
 def make_video_slow(input_video_path, output_video_path):
     '''
     # re-write video frame into double frame to make video more longer but slow
@@ -120,4 +120,3 @@ def make_video_slow(input_video_path, output_video_path):
     cap.release()
 
     return output_video_path
-
