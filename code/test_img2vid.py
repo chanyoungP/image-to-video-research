@@ -11,6 +11,10 @@ import asyncio
 import pytest
 import image2video as i2v
 
+# TODO : API로 만들기 
+# TODO : 파라미터 튜닝하기 
+# TODO : 영상 길이 늘리기 또는 반복재생으로 하기 
+
 '''
 input : single image path 
 
@@ -21,6 +25,8 @@ input : single image path
 
 output : 8 sec video 
 '''
+
+
 
 @pytest.mark.asyncio
 async def test_API():
@@ -45,7 +51,7 @@ async def test_API():
                                     )
     
     # output video file path 설정
-    timestamp = datetime.now().strftime("%m%d%H%M")
+    timestamp = datetime.now().strftime("%m%d%H%M%S")
     output_vid_path = f"./outputvideos/video_{timestamp}.mp4"
 
     generated_vid_path = i2v.img2vid_get(
