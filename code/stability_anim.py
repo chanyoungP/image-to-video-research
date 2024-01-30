@@ -37,7 +37,7 @@ args.init_image = './resized_image.png'
 animation_prompts = {
     0: "",               # animation prompts 꼭 들어가야함.
 }
-negative_prompt = "ark, split screen, photoshop, blurry, extra fingers, disfigured, kitsch, ugly, oversaturated, grain, low-res, blurry"
+negative_prompt = "ark, split screen, blurry"
 
 
 ##############################################################################
