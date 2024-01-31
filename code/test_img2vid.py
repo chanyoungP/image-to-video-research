@@ -75,7 +75,7 @@ async def test_API():
     assert slow_vid_path == result_path
 
 
-
+# video 파일의 용량을 확인해서 assert 
 
 
 
