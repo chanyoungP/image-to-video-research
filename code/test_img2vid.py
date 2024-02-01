@@ -1,5 +1,7 @@
 '''
 ## Test img2vid API by pytest
+
+motion id = 100 : 좌우 움직임
 '''
 import os
 from dotenv import load_dotenv
@@ -10,10 +12,6 @@ from datetime import datetime
 import asyncio 
 import pytest
 import image2video as i2v
-
-# TODO : API로 만들기 
-# TODO : 파라미터 튜닝하기 
-# TODO : 영상 길이 늘리기 또는 반복재생으로 하기 
 
 '''
 input : single image path 
@@ -37,7 +35,7 @@ async def test_API():
 
     # 이미지 resize 
     IMAGE_DIR_PATH = './images/sample'
-    resize_image, resize_img_path = get_resized_image_from_path(os.path.join(IMAGE_DIR_PATH,'human0.png'),
+    resize_image, resize_img_path = get_resized_image_from_path(os.path.join(IMAGE_DIR_PATH,'landscape1.jpg'),
                                                              save_image=True,
                                                              out_dir=IMAGE_DIR_PATH)
     
@@ -46,7 +44,7 @@ async def test_API():
         input_img_path=resize_img_path, 
         seed = random.randint(0,1000),
         cfg_scale=3.0,
-        motion_bucket_id=60,
+        motion_bucket_id=255,
         api_key=my_api
                                     )
     
