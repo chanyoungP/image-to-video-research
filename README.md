@@ -14,5 +14,5 @@
 ![6](https://github.com/chanyoungP/image-to-video-research/assets/67907678/7d11eebe-2782-40a7-9d53-165d184d7c0c)
 
 2. video
-https://github.com/chanyoungP/image-to-video-research/assets/67907678/a58e836a-b8a0-49f5-a35f-fb2208537c00
+https://github.com/chanyoungP/image-to-video-research/assets/67907678/689e0ab4-c935-40ac-8723-f237107c1ed6
 
